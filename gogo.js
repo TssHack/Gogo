@@ -139,10 +139,7 @@ bot.on('text', async (ctx) => {
     fs.writeFileSync(chartPath, Buffer.from(chartResponse.data, 'binary'));
 
     // دریافت قیمت تتر از نوبیتکس
-    const usdtPriceUrl = 'https://api.nobitex.ir/v2/orderbook/USDT-IRR';
-    const usdtResponse = await axios.get(usdtPriceUrl);
-    const usdtPriceInToman = parseFloat(usdtResponse.data.last_price);
-
+    
     // دریافت قیمت ارز مورد نظر از نوبیتکس
     const priceUrl = `https://api.nobitex.ir/v2/orderbook/${symbol.substring(0, 3)}-${symbol.substring(3)}`;
     const priceResponse = await axios.get(priceUrl);
@@ -155,7 +152,7 @@ bot.on('text', async (ctx) => {
 
     // ارسال چارت و قیمت‌ها
     const caption = `
-      💰 **قیمت ${currency_dict[symbol][0]}**: ${priceInToman.toLocaleString()} تومان
+      💰 **قیمت ${currency_dict[symbol][0]}**
       ⏳ **تایم فریم**: ۱ ساعته
       💵 **قیمت لحظه‌ای**: ${priceInUSD.toFixed(2)} USD
       📈 **بالاترین قیمت ۲۴ ساعت اخیر**: ${highPrice.toFixed(2)} USD
